@@ -75,6 +75,16 @@ public class Larry {
                 Task t = new Todo(desc);
                 tasks.add(t);
                 confirmAdded(tasks, t);
+            } else if (input.toLowerCase().startsWith("delete ")) {
+                int idx = parseIndex(input.substring(7));
+                if (!isValidIndex(idx, tasks)) {
+                    System.out.println("Invalid task index.");
+                    continue;
+                }
+                Task removed = tasks.remove(idx - 1);
+                System.out.println("Noted. I've removed this task:");
+                System.out.println("  " + removed);
+                System.out.println("Now you have " + tasks.size() + " task" + (tasks.size() == 1 ? "" : "s") + " in the list.");
             } else if (input.toLowerCase().startsWith("deadline")) {
                 String body = input.length() > 8 ? input.substring(8).trim() : "";
                 int byIdx = body.toLowerCase().indexOf("/by");
