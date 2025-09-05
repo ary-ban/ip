@@ -68,6 +68,10 @@ public class Larry {
                 System.out.println("  " + t);
             } else if (input.toLowerCase().startsWith("todo")) {
                 String desc = input.length() > 4 ? input.substring(4).trim() : "";
+                if (desc.isEmpty()) {
+                    System.out.println("OOPS!!! The description of a todo cannot be empty.");
+                    continue;
+                }
                 Task t = new Todo(desc);
                 tasks.add(t);
                 confirmAdded(tasks, t);
@@ -76,6 +80,14 @@ public class Larry {
                 int byIdx = body.toLowerCase().indexOf("/by");
                 String desc = (byIdx == -1) ? body : body.substring(0, byIdx).trim();
                 String by = (byIdx == -1) ? "" : body.substring(byIdx + 3).trim();
+                if (desc.isEmpty()) {
+                    System.out.println("OOPS!!! The description of a deadline cannot be empty.");
+                    continue;
+                }
+                if (byIdx == -1 || by.isEmpty()) {
+                    System.out.println("OOPS!!! Please specify a due time using '/by <when>'.");
+                    continue;
+                }
                 Task t = new Deadline(desc, by);
                 tasks.add(t);
                 confirmAdded(tasks, t);
@@ -86,13 +98,23 @@ public class Larry {
                 String desc = (fromIdx == -1) ? body : body.substring(0, fromIdx).trim();
                 String from = (fromIdx == -1) ? "" : body.substring(fromIdx + 5, (toIdx == -1 ? body.length() : toIdx)).trim();
                 String to = (toIdx == -1) ? "" : body.substring(toIdx + 3).trim();
+                if (desc.isEmpty()) {
+                    System.out.println("OOPS!!! The description of an event cannot be empty.");
+                    continue;
+                }
+                if (fromIdx == -1 || from.isEmpty()) {
+                    System.out.println("OOPS!!! Please specify a start time using '/from <start>'.");
+                    continue;
+                }
+                if (toIdx == -1 || to.isEmpty()) {
+                    System.out.println("OOPS!!! Please specify an end time using '/to <end>'.");
+                    continue;
+                }
                 Task t = new Event(desc, from, to);
                 tasks.add(t);
                 confirmAdded(tasks, t);
             } else if (!input.isEmpty()) {
-                Task t = new Task(input);
-                tasks.add(t);
-                System.out.println("added: " + input);
+                System.out.println("OOPS!!! I'm sorry, but I don't know what that means.");
             }
         }
     }
