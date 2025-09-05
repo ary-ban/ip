@@ -20,9 +20,11 @@ public class Task {
     private String statusIcon() {
         return isDone ? "X" : " ";
     }
-
+    protected String typeIcon() {
+        return "?";
+    }
     @Override
     public String toString() {
-        return "[" + statusIcon() + "] " + description;
+        return "[" + typeIcon() + "][" + statusIcon() + "] " + description;
     }
 }

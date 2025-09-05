@@ -24,6 +24,18 @@ public class Larry {
     private static boolean isValidIndex(int idx, List<Task> tasks) {
         return idx >= 1 && idx <= tasks.size();
     }
+    private static void printList(List<Task> tasks) {
+        System.out.println("Here are the tasks in your list:");
+        for (int i = 0; i < tasks.size(); i++) {
+            System.out.println((i + 1) + "." + tasks.get(i));
+        }
+    }
+    private static void confirmAdded(List<Task> tasks, Task t) {
+        System.out.println("Got it. I've added this task:");
+        System.out.println("  " + t);
+        System.out.println("Now you have " + tasks.size() + " task" + (tasks.size() == 1 ? "" : "s") + " in the list.");
+    }
+
     private static void runTaskLoop() {
         Scanner sc = new Scanner(System.in);
         List<Task> tasks = new ArrayList<>();
@@ -33,10 +45,7 @@ public class Larry {
             if (input.equalsIgnoreCase("bye")) {
                 break;
             } else if (input.equalsIgnoreCase("list")) {
-                System.out.println("Here are the tasks in your list:");
-                for (int i = 0; i < tasks.size(); i++) {
-                    System.out.println((i + 1) + ". " + tasks.get(i));
-                }
+                printList(tasks);
             } else if (input.toLowerCase().startsWith("mark ")) {
                 int idx = parseIndex(input.substring(5));
                 if (!isValidIndex(idx, tasks)) {
@@ -57,6 +66,29 @@ public class Larry {
                 t.markUndone();
                 System.out.println("OK, I've marked this task as not done yet:");
                 System.out.println("  " + t);
+            } else if (input.toLowerCase().startsWith("todo")) {
+                String desc = input.length() > 4 ? input.substring(4).trim() : "";
+                Task t = new Todo(desc);
+                tasks.add(t);
+                confirmAdded(tasks, t);
+            } else if (input.toLowerCase().startsWith("deadline")) {
+                String body = input.length() > 8 ? input.substring(8).trim() : "";
+                int byIdx = body.toLowerCase().indexOf("/by");
+                String desc = (byIdx == -1) ? body : body.substring(0, byIdx).trim();
+                String by = (byIdx == -1) ? "" : body.substring(byIdx + 3).trim();
+                Task t = new Deadline(desc, by);
+                tasks.add(t);
+                confirmAdded(tasks, t);
+            } else if (input.toLowerCase().startsWith("event")) {
+                String body = input.length() > 5 ? input.substring(5).trim() : "";
+                int fromIdx = body.toLowerCase().indexOf("/from");
+                int toIdx = body.toLowerCase().indexOf("/to");
+                String desc = (fromIdx == -1) ? body : body.substring(0, fromIdx).trim();
+                String from = (fromIdx == -1) ? "" : body.substring(fromIdx + 5, (toIdx == -1 ? body.length() : toIdx)).trim();
+                String to = (toIdx == -1) ? "" : body.substring(toIdx + 3).trim();
+                Task t = new Event(desc, from, to);
+                tasks.add(t);
+                confirmAdded(tasks, t);
             } else if (!input.isEmpty()) {
                 Task t = new Task(input);
                 tasks.add(t);
