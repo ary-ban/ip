@@ -15,7 +15,7 @@ public class Event extends Task {
     }
     @Override
     public String toString() {
-        return super.toString() + " (from: " + from + " to: " + to + ")";
+        return super.toString() + " (from: " + DateTimeFormats.pretty(from) + " to: " + DateTimeFormats.pretty(to) + ")";
     }
     public String getFrom() { return from; }
     public String getTo() { return to; }
