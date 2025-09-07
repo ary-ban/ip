@@ -27,4 +27,6 @@ public class Task {
     public String toString() {
         return "[" + typeIcon() + "][" + statusIcon() + "] " + description;
     }
+    public String getDescription() { return description; }
+    public boolean isDone() { return isDone; }
 }

@@ -38,7 +38,8 @@ public class Larry {
 
     private static void runTaskLoop() {
         Scanner sc = new Scanner(System.in);
-        List<Task> tasks = new ArrayList<>();
+        Storage storage = new Storage("data/larry.txt");
+        List<Task> tasks = storage.load();
 
         while (sc.hasNextLine()) {
             String input = sc.nextLine().trim();
@@ -56,6 +57,7 @@ public class Larry {
                 t.markDone();
                 System.out.println("Nice! I've marked this task as done:");
                 System.out.println("  " + t);
+                storage.save(tasks);
             } else if (input.toLowerCase().startsWith("unmark ")) {
                 int idx = parseIndex(input.substring(7));
                 if (!isValidIndex(idx, tasks)) {
@@ -66,6 +68,7 @@ public class Larry {
                 t.markUndone();
                 System.out.println("OK, I've marked this task as not done yet:");
                 System.out.println("  " + t);
+                storage.save(tasks);
             } else if (input.toLowerCase().startsWith("todo")) {
                 String desc = input.length() > 4 ? input.substring(4).trim() : "";
                 if (desc.isEmpty()) {
@@ -75,6 +78,7 @@ public class Larry {
                 Task t = new Todo(desc);
                 tasks.add(t);
                 confirmAdded(tasks, t);
+                storage.save(tasks);
             } else if (input.toLowerCase().startsWith("delete ")) {
                 int idx = parseIndex(input.substring(7));
                 if (!isValidIndex(idx, tasks)) {
@@ -85,6 +89,7 @@ public class Larry {
                 System.out.println("Noted. I've removed this task:");
                 System.out.println("  " + removed);
                 System.out.println("Now you have " + tasks.size() + " task" + (tasks.size() == 1 ? "" : "s") + " in the list.");
+                storage.save(tasks);
             } else if (input.toLowerCase().startsWith("deadline")) {
                 String body = input.length() > 8 ? input.substring(8).trim() : "";
                 int byIdx = body.toLowerCase().indexOf("/by");
@@ -101,6 +106,7 @@ public class Larry {
                 Task t = new Deadline(desc, by);
                 tasks.add(t);
                 confirmAdded(tasks, t);
+                storage.save(tasks);
             } else if (input.toLowerCase().startsWith("event")) {
                 String body = input.length() > 5 ? input.substring(5).trim() : "";
                 int fromIdx = body.toLowerCase().indexOf("/from");
@@ -123,6 +129,7 @@ public class Larry {
                 Task t = new Event(desc, from, to);
                 tasks.add(t);
                 confirmAdded(tasks, t);
+                storage.save(tasks);
             } else if (!input.isEmpty()) {
                 System.out.println("OOPS!!! I'm sorry, but I don't know what that means.");
             }
