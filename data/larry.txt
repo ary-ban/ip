@@ -1,6 +1,0 @@
-E|0|running|today|tomorrow
-E|0|running|today|tomorrow
-D|0|return book|2025-09-12
-D|0|return book|2025-09-12
-E|0|project meeting|2025-09-12 1400|2025-09-12 1600
-E|0|casual chat|Sunday 2pm|4pm
