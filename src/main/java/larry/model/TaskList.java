@@ -1,4 +1,4 @@
-package larry;
+package larry.model;
 
 import java.util.ArrayList;
 import java.util.List;

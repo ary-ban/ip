@@ -1,4 +1,8 @@
 package larry;
+import larry.ui.Ui;
+import larry.parser.Parser;
+import larry.model.*;
+import larry.storage.Storage;
 import java.util.Scanner;
 
 public class Larry {

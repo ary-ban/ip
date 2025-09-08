@@ -1,4 +1,4 @@
-package larry;
+package larry.model;
 
 public class Task {
     private final String description;
