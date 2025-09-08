@@ -1,4 +1,4 @@
-package larry;
+package larry.parser;
 
 public class Parser {
 

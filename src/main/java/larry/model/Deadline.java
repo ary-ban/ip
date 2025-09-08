@@ -1,4 +1,5 @@
-package larry;
+package larry.model;
+import larry.util.DateTimeFormats;
 
 public class Deadline extends Task {
     private final String by;

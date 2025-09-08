@@ -1,5 +1,5 @@
-package larry;
-
+package larry.ui;
+import larry.model.Task;
 import java.util.List;
 
 public class Ui {

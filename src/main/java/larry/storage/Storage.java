@@ -1,5 +1,5 @@
-package larry;
-
+package larry.storage;
+import larry.model.*;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Storage {
+public class    Storage {
     private final Path savePath;
 
     public Storage(String relativePath) {
