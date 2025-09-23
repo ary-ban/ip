@@ -3,9 +3,18 @@ plugins {
     id 'application'
     id 'com.github.johnrengelman.shadow' version '7.1.2'
 }
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
 
 repositories {
     mavenCentral()
+}
+
+tasks.test {
+    useJUnitPlatform()
 }
 
 dependencies {
@@ -28,7 +37,7 @@ test {
 }
 
 application {
-    mainClass.set("seedu.duke.Duke")
+    mainClass = 'larry.Larry'
 }
 
 shadowJar {
