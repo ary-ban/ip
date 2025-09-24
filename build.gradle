@@ -40,9 +40,11 @@ application {
     mainClass = 'larry.Larry'
 }
 
-shadowJar {
-    archiveBaseName = "duke"
-    archiveClassifier = null
+jar {
+    archiveBaseName = "larry"
+    manifest {
+        attributes 'Main-Class': 'larry.Larry'
+    }
 }
 
 run{
