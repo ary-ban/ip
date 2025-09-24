@@ -1,10 +1,10 @@
-/**
- * Loads and saves tasks to a local data file using a simple line format.
- * Creates the file on first run if it does not exist.
- */
-
 package larry.storage;
-import larry.model.*;
+
+import larry.model.Deadline;
+import larry.model.Event;
+import larry.model.Task;
+import larry.model.Todo;
+
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -13,13 +13,17 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
-
-public class    Storage {
+/**
+ * Loads and saves tasks to a local data file using a simple line format.
+ * Creates the file on first run if it does not exist.
+ */
+public class Storage {
     private final Path savePath;
 
     public Storage(String relativePath) {
         this.savePath = Path.of(relativePath);
     }
+
     /** Loads tasks from disk; returns an empty list on first run or unreadable file. */
     public List<Task> load() {
         try {

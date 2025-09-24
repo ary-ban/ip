@@ -1,27 +1,37 @@
+package larry;
+
+import java.util.Scanner;
+
+import larry.model.Deadline;
+import larry.model.Event;
+import larry.model.Task;
+import larry.model.TaskList;
+import larry.model.Todo;
+import larry.parser.Parser;
+import larry.storage.Storage;
+import larry.ui.Ui;
+
 /**
  * Entry pt. of the Larry application.
  * Wires Ui, Storage and TaskList, and dispatches user commands.
  */
-
-package larry;
-import larry.ui.Ui;
-import larry.parser.Parser;
-import larry.model.*;
-import larry.storage.Storage;
-import java.util.Scanner;
-
 public class Larry {
+
+    /** Starts the console application. */
     public static void main(String[] args) {
         Ui ui = new Ui();
         Storage storage = new Storage("data/larry.txt");
         TaskList tasks = new TaskList(storage.load());
+
         ui.showGreeting();
+
         Scanner sc = new Scanner(System.in);
         while (sc.hasNextLine()) {
             String input = sc.nextLine().trim();
             if (input.equalsIgnoreCase("bye")) {
                 break;
             }
+
             String cmd = Parser.commandWord(input);
             switch (cmd) {
                 case "list": {
@@ -80,6 +90,7 @@ public class Larry {
                     int byIdx = body.toLowerCase().indexOf("/by");
                     String desc = (byIdx == -1) ? body : body.substring(0, byIdx).trim();
                     String by   = (byIdx == -1) ? ""   : body.substring(byIdx + 3).trim();
+
                     if (desc.isEmpty()) {
                         ui.showError("OOPS!!! The description of a deadline cannot be empty.");
                         break;
@@ -88,6 +99,7 @@ public class Larry {
                         ui.showError("OOPS!!! Please specify a due time using '/by <when>'.");
                         break;
                     }
+
                     Task t = new Deadline(desc, by);
                     tasks.add(t);
                     ui.showAdded(t, tasks.size());
@@ -113,6 +125,7 @@ public class Larry {
                         ui.showError("OOPS!!! Please specify an end time using '/to <end>'.");
                         break;
                     }
+
                     Task t = new Event(desc, from, to);
                     tasks.add(t);
                     ui.showAdded(t, tasks.size());
@@ -127,6 +140,7 @@ public class Larry {
                 }
             }
         }
+
         ui.showExit();
     }
 }
