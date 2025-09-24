@@ -1,3 +1,8 @@
+/**
+ * Loads and saves tasks to a local data file using a simple line format.
+ * Creates the file on first run if it does not exist.
+ */
+
 package larry.storage;
 import larry.model.*;
 import java.io.BufferedWriter;
@@ -15,6 +20,7 @@ public class    Storage {
     public Storage(String relativePath) {
         this.savePath = Path.of(relativePath);
     }
+    /** Loads tasks from disk; returns an empty list on first run or unreadable file. */
     public List<Task> load() {
         try {
             ensureParentDir();
@@ -58,6 +64,7 @@ public class    Storage {
         }
     }
 
+    /** Persists the given task list to disk, replacing previous contents. */
     public void save(List<Task> tasks) {
         try {
             ensureParentDir();

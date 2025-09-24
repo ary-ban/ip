@@ -1,3 +1,7 @@
+/**
+ * Represents a user task with a description and completion state.
+ * Subclasses specialize display (Todo, Deadline, Event).
+ */
 package larry.model;
 
 public class Task {
@@ -9,14 +13,18 @@ public class Task {
         this.isDone = false;
     }
 
+
+    /** Marks this task as done. */
     public void markDone() {
         this.isDone = true;
     }
 
+    /** Marks this task as not done yet. */
     public void markUndone() {
         this.isDone = false;
     }
 
+    /** Returns a human-readable form used by the UI and tests. */
     private String statusIcon() {
         return isDone ? "X" : " ";
     }

@@ -1,3 +1,8 @@
+/**
+ * Entry pt. of the Larry application.
+ * Wires Ui, Storage and TaskList, and dispatches user commands.
+ */
+
 package larry;
 import larry.ui.Ui;
 import larry.parser.Parser;

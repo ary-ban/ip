@@ -1,3 +1,7 @@
+/**
+ * A task that is due by a specific date/time.
+ * Stores the raw input; formatted when displayed.
+ */
 package larry.model;
 import larry.util.DateTimeFormats;
 
