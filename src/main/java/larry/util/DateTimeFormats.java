@@ -1,9 +1,3 @@
-/**
- * Utilities for parsing and pretty-printing date/time strings.
- * Accepts ISO-like inputs (e.g., {@code yyyy-MM-dd}, {@code yyyy-MM-dd HH:mm/HHmm}).
- * Falls back to the original string if parsing fails.
- */
-
 package larry.util;
 
 import java.time.LocalDate;
@@ -12,6 +6,11 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 
+/**
+ * Utilities for parsing and pretty-printing date/time strings.
+ * Accepts ISO-like inputs (e.g., {@code yyyy-MM-dd}, {@code yyyy-MM-dd HH:mm/HHmm}).
+ * Falls back to the original string if parsing fails.
+ */
 public final class DateTimeFormats {
     private DateTimeFormats() {}
 
@@ -29,15 +28,21 @@ public final class DateTimeFormats {
         try {
             LocalDate d = LocalDate.parse(raw.trim(), ISO_DATE);
             return OUT_DATE.format(d);
-        } catch (DateTimeParseException ignore) { }
+        } catch (DateTimeParseException ignore) {
+        }
+
         try {
             LocalDateTime dt = LocalDateTime.parse(raw.trim(), ISO_DATETIME_COLON);
             return OUT_DATETIME.format(dt);
-        } catch (DateTimeParseException ignore) { }
+        } catch (DateTimeParseException ignore) {
+        }
+
         try {
             LocalDateTime dt = LocalDateTime.parse(raw.trim(), ISO_DATETIME_COMPACT);
             return OUT_DATETIME.format(dt);
-        } catch (DateTimeParseException ignore) { }
+        } catch (DateTimeParseException ignore) {
+        }
+
         return raw;
     }
 }

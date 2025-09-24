@@ -1,10 +1,11 @@
+package larry.model;
+
+import larry.util.DateTimeFormats;
+
 /**
  * A task that is due by a specific date/time.
  * Stores the raw input; formatted when displayed.
  */
-package larry.model;
-import larry.util.DateTimeFormats;
-
 public class Event extends Task {
     private final String from;
     private final String to;
@@ -20,7 +21,9 @@ public class Event extends Task {
     }
     @Override
     public String toString() {
-        return super.toString() + " (from: " + DateTimeFormats.pretty(from) + " to: " + DateTimeFormats.pretty(to) + ")";
+        return super.toString()
+                + " (from: " + DateTimeFormats.pretty(from)
+                + " to: " + DateTimeFormats.pretty(to) + ")";
     }
     public String getFrom() { return from; }
     public String getTo() { return to; }

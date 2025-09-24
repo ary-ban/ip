@@ -1,27 +1,33 @@
-/**
- * In-memory list of tasks with 1-based indexing for user-facing operations.
- */
-
 package larry.model;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * In-memory list of tasks with 1-based indexing for user-facing operations.
+ */
 public class TaskList {
+
     private final List<Task> tasks;
 
     /** Creates an empty task list. */
     public TaskList() {
         this.tasks = new ArrayList<>();
     }
+
     public TaskList(List<Task> initial) {
         this.tasks = new ArrayList<>(initial);
     }
 
     /** Number of tasks currently in the list. */
-    public int size() { return tasks.size(); }
+    public int size() {
+        return tasks.size();
+    }
+
     /** Underlying list view used by UI and Storage. */
-    public List<Task> asList() { return java.util.Collections.unmodifiableList(tasks); }
+    public List<Task> asList() {
+        return java.util.Collections.unmodifiableList(tasks);
+    }
 
     /** Appends the given task to the end of the list. */
     public void add(Task t) {

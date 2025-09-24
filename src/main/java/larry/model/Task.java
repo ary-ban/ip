@@ -1,9 +1,9 @@
+package larry.model;
+
 /**
  * Represents a user task with a description and completion state.
  * Subclasses specialize display (Todo, Deadline, Event).
  */
-package larry.model;
-
 public class Task {
     private final String description;
     private boolean isDone;
