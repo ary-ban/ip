@@ -55,6 +55,20 @@ public class Ui {
         System.out.println("Now you have " + size + " task" + (size == 1 ? "" : "s") + " in the list.");
     }
 
+    /** Prints tasks that matched a find query; shows a friendly message if none. */
+    public void showFound(java.util.List<larry.model.Task> tasks, String keyword) {
+        if (tasks.isEmpty()) {
+            System.out.println("No matches for: " + keyword);
+            return;
+        }
+        System.out.println("Here are the matching tasks in your list:");
+        int i = 1;
+        for (larry.model.Task t : tasks) {
+            System.out.println(i + "." + t);
+            i++;
+        }
+    }
+
     /** Prints a one-line error message without terminating the app. */
     public void showError(String msg) {
         System.out.println(msg);

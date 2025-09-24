@@ -34,6 +34,16 @@ public class Larry {
 
             String cmd = Parser.commandWord(input);
             switch (cmd) {
+                case "find": {
+                    String keyword = Parser.argTail(input, "find").trim();
+                    if (keyword.isEmpty()) {
+                        ui.showError("Usage: find <keyword>");
+                        break;
+                    }
+                    java.util.List<larry.model.Task> hits = tasks.find(keyword);
+                    ui.showFound(hits, keyword);
+                    break;
+                }
                 case "list": {
                     ui.showList(tasks.asList());
                     break;
