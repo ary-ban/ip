@@ -1,40 +1,55 @@
+/**
+ * Handles all user-visible console messages and prompts.
+ * Centralizing messages keeps text-UI tests stable.
+ */
+
+
 package larry.ui;
 import larry.model.Task;
 import java.util.List;
 
 public class Ui {
 
+    /** Prints the greeting banner shown at program start. */
     public void showGreeting() {
         System.out.println(" Hello! I'm Larry");
         System.out.println(" What can I do for you?");
     }
+    /** Prints the exit message shown at program end. */
     public void showExit() {
         System.out.println(" Bye. Hope to see you again soon!");
     }
+    /** Prints the exit message shown at program end. */
     public void showList(List<Task> tasks) {
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < tasks.size(); i++) {
             System.out.println((i + 1) + "." + tasks.get(i));
         }
     }
+    /** Announces that a task was added and shows the new total size. */
     public void showAdded(Task t, int size) {
         System.out.println("Got it. I've added this task:");
         System.out.println("  " + t);
         System.out.println("Now you have " + size + " task" + (size == 1 ? "" : "s") + " in the list.");
     }
+    /** Announces that a task was marked done. */
     public void showMarked(Task t) {
         System.out.println("Nice! I've marked this task as done:");
         System.out.println("  " + t);
     }
+    /** Announces that a task was marked not done. */
     public void showUnmarked(Task t) {
         System.out.println("OK, I've marked this task as not done yet:");
         System.out.println("  " + t);
     }
+
+    /** Announces that a task was deleted and shows the new total size. */
     public void showDeleted(Task t, int size) {
         System.out.println("Noted. I've removed this task:");
         System.out.println("  " + t);
         System.out.println("Now you have " + size + " task" + (size == 1 ? "" : "s") + " in the list.");
     }
+    /** Prints a one-line error message without terminating the app. */
     public void showError(String msg) {
         System.out.println(msg);
     }
