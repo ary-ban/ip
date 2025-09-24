@@ -48,4 +48,16 @@ public class TaskList {
     public boolean isValidIndex(int oneBasedIndex) {
         return oneBasedIndex >= 1 && oneBasedIndex <= tasks.size();
     }
+
+    /** Returns tasks whose string form contains the keyword. */
+    public java.util.List<Task> find(String keyword) {
+        String k = keyword.toLowerCase();
+        java.util.List<Task> matches = new java.util.ArrayList<>();
+        for (Task t : tasks) {
+            if (t.toString().toLowerCase().contains(k)) {
+                matches.add(t);
+            }
+        }
+        return matches;
+    }
 }
