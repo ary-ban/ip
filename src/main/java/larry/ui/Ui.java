@@ -69,6 +69,21 @@ public class Ui {
         }
     }
 
+    /** Prints a short usage guide for available commands (with aliases). */
+    public void showHelp() {
+        System.out.println("Commands (aliases in brackets):");
+        System.out.println("  list (ls)");
+        System.out.println("  todo <desc> (t)");
+        System.out.println("  deadline <desc> /by <when> (dl)");
+        System.out.println("  event <desc> /from <start> /to <end> (ev)");
+        System.out.println("  mark <index> (mk)");
+        System.out.println("  unmark <index> (um)");
+        System.out.println("  delete <index> (del)");
+        System.out.println("  find <keyword> (f)");
+        System.out.println("  help (h)");
+        System.out.println("  bye (q)");
+    }
+
     /** Prints a one-line error message without terminating the app. */
     public void showError(String msg) {
         System.out.println(msg);

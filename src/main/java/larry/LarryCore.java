@@ -113,7 +113,22 @@ public class LarryCore {
             storage.save(tasks.asList());
             return addedMsg(t);
         }
-        default:
+            case "help": {
+                return String.join(System.lineSeparator(),
+                        "Commands (aliases in brackets):",
+                        "  list (ls)",
+                        "  todo <desc> (t)",
+                        "  deadline <desc> /by <when> (dl)",
+                        "  event <desc> /from <start> /to <end> (ev)",
+                        "  mark <index> (mk)",
+                        "  unmark <index> (um)",
+                        "  delete <index> (del)",
+                        "  find <keyword> (f)",
+                        "  help (h)",
+                        "  bye (q)"
+                );
+            }
+            default:
             if (line.isEmpty()) {
                 return ""; // ignore empty line
             }

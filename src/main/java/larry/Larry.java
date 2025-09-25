@@ -142,6 +142,10 @@ public class Larry {
                     storage.save(tasks.asList());
                     break;
                 }
+                case "help": {
+                    ui.showHelp();
+                    break;
+                }
                 default: {
                     if (!input.isEmpty()) {
                         ui.showError("OOPS!!! I'm sorry, but I don't know what that means.");
