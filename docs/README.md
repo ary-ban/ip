@@ -1,30 +1,25 @@
-# Duke User Guide
+# Larry
 
-// Update the title above to match the actual product name
+> “Your mind is for having ideas, not holding them.” — David Allen
 
-// Product screenshot goes here
+**Larry** is a simple, text-based task bot with a small JavaFX GUI. It lets you track **todos**, **deadlines**, and **events**, and saves them to disk so your list survives restarts.
 
-// Product intro goes here
+- Java 17
+- Gradle build
+- CLI **and** GUI
+- Saves to `data/larry.txt`
 
-## Adding deadlines
+---
 
-// Describe the action and its outcome.
+## Screenshot
 
-// Give examples of usage
+![Larry GUI](docs/Ui.png)
 
-Example: `keyword (optional arguments)`
+---
 
-// A description of the expected outcome goes here
+## Quick start
 
-```
-expected output
-```
-
-## Feature ABC
-
-// Feature details
-
-
-## Feature XYZ
-
-// Feature details
+### GUI (recommended)
+```bash
+# from the repo root
+./gradlew run         # Windows: .\gradlew run
