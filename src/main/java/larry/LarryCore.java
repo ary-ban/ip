@@ -24,13 +24,14 @@ public class LarryCore {
 
     public String getResponse(String input) {
         String line = input == null ? "" : input.trim();
-        if (line.equalsIgnoreCase("bye")) {
+
+        String cmd = Parser.commandWord(line);
+
+        switch (cmd) {
+        case "bye": {
             shouldExit = true;
             return " Bye. Hope to see you again soon!";
         }
-
-        String cmd = Parser.commandWord(line);
-        switch (cmd) {
         case "list": {
             return "Here are the tasks in your list:\n" + numbered(tasks.asList());
         }
@@ -43,6 +44,23 @@ public class LarryCore {
             t.markDone();
             storage.save(tasks.asList());
             return "Nice! I've marked this task as done:\n  " + t;
+        }
+        case "find": {
+            String keyword = Parser.argTail(line, "find").toLowerCase();
+            if (keyword.isEmpty()) {
+                return "OOPS!!! Please provide a keyword, e.g., find book";
+            }
+            java.util.List<Task> matches = new java.util.ArrayList<>();
+            for (int i = 0; i < tasks.size(); i++) {
+                Task t = tasks.get(i + 1); // TaskList is 1-based externally
+                if (t.toString().toLowerCase().contains(keyword)) {
+                    matches.add(t);
+                }
+            }
+            if (matches.isEmpty()) {
+                return "No matching tasks found.";
+            }
+            return "Here are the matching tasks in your list:\n" + numbered(matches);
         }
         case "unmark": {
             int idx = Parser.parseIndex(Parser.argTail(line, "unmark"));
