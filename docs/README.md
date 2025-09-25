@@ -13,7 +13,7 @@
 
 ## Screenshot
 
-![Larry GUI](docs/Ui.png)
+![Larry GUI](./Ui.png)
 
 ---
 
