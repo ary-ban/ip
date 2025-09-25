@@ -12,7 +12,6 @@ import larry.ui.Ui;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
 public class LarryCore {
     private final Ui ui = new Ui();
     private final Storage storage = new Storage("data/larry.txt");
@@ -73,8 +72,7 @@ public class LarryCore {
             Task t = new Todo(desc);
             tasks.add(t);
             storage.save(tasks.asList());
-            return "Got it. I've added this task:\n  " + t
-                    + "\nNow you have " + tasks.size() + " task" + (tasks.size() == 1 ? "" : "s") + " in the list.";
+            return addedMsg(t);
         }
         case "deadline": {
             String body = Parser.argTail(line, "deadline");
@@ -90,8 +88,7 @@ public class LarryCore {
             Task t = new Deadline(desc, by);
             tasks.add(t);
             storage.save(tasks.asList());
-            return "Got it. I've added this task:\n  " + t
-                    + "\nNow you have " + tasks.size() + " task" + (tasks.size() == 1 ? "" : "s") + " in the list.";
+            return addedMsg(t);
         }
         case "event": {
             String body = Parser.argTail(line, "event");
@@ -114,8 +111,7 @@ public class LarryCore {
             Task t = new Event(desc, from, to);
             tasks.add(t);
             storage.save(tasks.asList());
-            return "Got it. I've added this task:\n  " + t
-                    + "\nNow you have " + tasks.size() + " task" + (tasks.size() == 1 ? "" : "s") + " in the list.";
+            return addedMsg(t);
         }
         default:
             if (line.isEmpty()) {
@@ -131,5 +127,13 @@ public class LarryCore {
             sb.append(i + 1).append(".").append(tasks.get(i)).append("\n");
         }
         return sb.toString().trim();
+    }
+
+    private String addedMsg(Task t) {
+        return larry.util.Strings.lines(
+                "Got it. I've added this task:",
+                "  " + t,
+                "Now you have " + tasks.size() + " task" + (tasks.size() == 1 ? "" : "s") + " in the list."
+        );
     }
 }
