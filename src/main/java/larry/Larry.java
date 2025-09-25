@@ -28,11 +28,12 @@ public class Larry {
         Scanner sc = new Scanner(System.in);
         while (sc.hasNextLine()) {
             String input = sc.nextLine().trim();
-            if (input.equalsIgnoreCase("bye")) {
+            String cmd = Parser.commandWord(input);
+
+            if ("bye".equals(cmd)) {
                 break;
             }
 
-            String cmd = Parser.commandWord(input);
             switch (cmd) {
                 case "find": {
                     String keyword = Parser.argTail(input, "find").trim();
@@ -140,6 +141,10 @@ public class Larry {
                     tasks.add(t);
                     ui.showAdded(t, tasks.size());
                     storage.save(tasks.asList());
+                    break;
+                }
+                case "help": {
+                    ui.showHelp();
                     break;
                 }
                 default: {
