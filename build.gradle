@@ -2,13 +2,14 @@ plugins {
     id 'java'
     id 'application'
     id 'org.openjfx.javafxplugin' version '0.0.14'
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
 }
+
 java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(17)
     }
 }
-
 
 repositories {
     mavenCentral()
@@ -59,6 +60,12 @@ tasks.withType(Test).configureEach {
 }
 tasks.named('run') {
     jvmArgs '-ea'
+}
+
+tasks.named('shadowJar') {
+    archiveBaseName.set('larry')
+    archiveClassifier.set('')
+    archiveVersion.set('') // optional: omit version in filename
 }
 
 run{
