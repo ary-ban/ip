@@ -54,6 +54,13 @@ javafx {
     modules = ['javafx.controls']
 }
 
+tasks.withType(Test).configureEach {
+    jvmArgs '-ea'
+}
+tasks.named('run') {
+    jvmArgs '-ea'
+}
+
 run{
     standardInput = System.in
 }

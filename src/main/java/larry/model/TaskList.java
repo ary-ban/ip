@@ -31,21 +31,25 @@ public class TaskList {
 
     /** Appends the given task to the end of the list. */
     public void add(Task t) {
+        assert t != null : "task must not be null";
         tasks.add(t);
     }
 
     /** Removes and returns the task at the given 1-based index (callers validate first). */
     public Task delete(int oneBasedIndex) {
+        assert oneBasedIndex >= 1 && oneBasedIndex <= tasks.size() : "index out of range";
         return tasks.remove(oneBasedIndex - 1);
     }
 
     /** Returns the task at the given 1-based index (callers validate first). */
     public Task get(int oneBasedIndex) {
+        assert oneBasedIndex >= 1 && oneBasedIndex <= tasks.size() : "index out of range";
         return tasks.get(oneBasedIndex - 1);
     }
 
     /** Returns true if {@code oneBasedIndex} is within [1, size()]. */
     public boolean isValidIndex(int oneBasedIndex) {
+
         return oneBasedIndex >= 1 && oneBasedIndex <= tasks.size();
     }
 
