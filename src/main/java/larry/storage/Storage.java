@@ -35,7 +35,10 @@ public class Storage {
             List<String> lines = Files.readAllLines(savePath, StandardCharsets.UTF_8);
             List<Task> tasks = new ArrayList<>();
             for (String line : lines) {
-                if (line.isBlank()) continue;
+                if (line.isBlank()){
+                    continue;
+            }
+
                 String[] parts = line.split("\\|");
                 String type = parts[0];
                 boolean done = "1".equals(parts[1]);
@@ -60,6 +63,7 @@ public class Storage {
                         break;
                 }
                 if (done) t.markDone();
+                assert t != null : "parsed task should not be null";
                 tasks.add(t);
             }
             return tasks;
@@ -70,6 +74,7 @@ public class Storage {
 
     /** Persists the given task list to disk, replacing previous contents. */
     public void save(List<Task> tasks) {
+        assert tasks != null : "tasks list must not be null";
         try {
             ensureParentDir();
             try (BufferedWriter bw = Files.newBufferedWriter(savePath, StandardCharsets.UTF_8)) {
