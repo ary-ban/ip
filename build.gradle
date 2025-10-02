@@ -1,73 +1,38 @@
 plugins {
-    id 'java'
     id 'application'
-    id 'org.openjfx.javafxplugin' version '0.0.14'
     id 'com.github.johnrengelman.shadow' version '8.1.1'
 }
 
+repositories { mavenCentral() }
+
 java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(17)
-    }
-}
-
-repositories {
-    mavenCentral()
-}
-
-tasks.test {
-    useJUnitPlatform()
-}
-
-dependencies {
-    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.10.0'
-    testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.10.0'
-    implementation 'org.openjfx:javafx-controls:17.0.13'
-}
-
-test {
-    useJUnitPlatform()
-
-    testLogging {
-        events "passed", "skipped", "failed"
-
-        showExceptions true
-        exceptionFormat "full"
-        showCauses true
-        showStackTraces true
-        showStandardStreams = false
-    }
+    toolchain { languageVersion = JavaLanguageVersion.of(17) }
 }
 
 application {
     mainClass = 'larry.gui.Launcher'
 }
 
-jar {
-    archiveBaseName = "larry"
-    manifest {
-        attributes 'Main-Class': 'larry.Larry'
-    }
+dependencies {
+    // Windows
+    implementation "org.openjfx:javafx-base:17.0.12:win"
+    implementation "org.openjfx:javafx-graphics:17.0.12:win"
+    implementation "org.openjfx:javafx-controls:17.0.12:win"
+    // macOS
+    implementation "org.openjfx:javafx-base:17.0.12:mac"
+    implementation "org.openjfx:javafx-graphics:17.0.12:mac"
+    implementation "org.openjfx:javafx-controls:17.0.12:mac"
+    // Linux
+    implementation "org.openjfx:javafx-base:17.0.12:linux"
+    implementation "org.openjfx:javafx-graphics:17.0.12:linux"
+    implementation "org.openjfx:javafx-controls:17.0.12:linux"
 }
 
-javafx {
-    version = '17'
-    modules = ['javafx.controls']
-}
-
-tasks.withType(Test).configureEach {
-    jvmArgs '-ea'
-}
-tasks.named('run') {
-    jvmArgs '-ea'
+tasks.withType(JavaExec).configureEach {
+    jvmArgs += ['-Dprism.order=sw']
 }
 
 tasks.named('shadowJar') {
-    archiveBaseName.set('larry')
-    archiveClassifier.set('')
-    archiveVersion.set('') // optional: omit version in filename
-}
-
-run{
-    standardInput = System.in
+    archiveFileName.set('larry.jar')
+    manifest { attributes 'Main-Class': application.mainClass.get() }
 }
